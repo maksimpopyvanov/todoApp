@@ -2,7 +2,7 @@ package todo
 
 type TodoList struct {
 	Id          int    `json:"id"`
-	Title       string `json:"title"`
+	Title       string `json:"title" bindibg:"required"`
 	Description string `json:"description"`
 }
 
