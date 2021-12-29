@@ -8,9 +8,8 @@ import (
 )
 
 func (h *Handler) createList(c *gin.Context) {
-	Userid, ok := c.Get(userCtx)
-	if !ok {
-		newErrorResponse(c, http.StatusInternalServerError, "user is not found")
+	userId, err := getUserId(c)
+	if err != nil {
 		return
 	}
 
@@ -20,7 +19,7 @@ func (h *Handler) createList(c *gin.Context) {
 		return
 	}
 
-	id, err := h.services.TodoList.CreateList(Userid.(int), input)
+	id, err := h.services.TodoList.CreateList(userId, input)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
