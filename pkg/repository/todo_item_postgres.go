@@ -53,3 +53,11 @@ func (r *TodoItemRepository) GetAll(listId int) ([]todo.TodoItem, error) {
 
 	return items, err
 }
+
+func (r *TodoItemRepository) GetById(listId int, itemId int) (todo.TodoItem, error) {
+	var item todo.TodoItem
+	query := fmt.Sprintf(`SELECT item.id, item.title, item.description, item.done FROM %s item
+		INNER JOIN %s li ON li.item_id = item.id
+		WHERE li.list_id = $1 AND item.id = $2`, todoItemsTable, listItemsTable)
+
+}
