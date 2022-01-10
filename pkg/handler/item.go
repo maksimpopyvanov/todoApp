@@ -65,19 +65,13 @@ func (h *Handler) getItemById(c *gin.Context) {
 		return
 	}
 
-	listId, err := strconv.Atoi(c.Param("id"))
+	itemId, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		newErrorResponse(c, http.StatusBadRequest, "invalid list id param")
 		return
 	}
 
-	itemId, err := strconv.Atoi(c.Param("items_id"))
-	if err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "invalid list id param")
-		return
-	}
-
-	item, err := h.services.TodoItem.GetById(userId, listId, itemId)
+	item, err := h.services.TodoItem.GetById(userId, itemId)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

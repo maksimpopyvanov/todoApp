@@ -35,11 +35,6 @@ func (s *TodoItemService) GetAll(userId int, listId int) ([]todo.TodoItem, error
 	return s.repo.GetAll(listId)
 }
 
-func (s *TodoItemService) GetById(userId int, listId int, itemId int) (todo.TodoItem, error) {
-	_, err := s.listRepo.GetById(userId, listId)
-	if err != nil {
-		return nil, err
-	}
-
-	return s.repo.GetById(listId, itemId)
+func (s *TodoItemService) GetById(userId int, itemId int) (todo.TodoItem, error) {
+	return s.repo.GetById(userId, itemId)
 }
